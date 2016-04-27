@@ -44,13 +44,13 @@ class MainHandler_loto(BaseHandler):
         dodatna_stevilka_koliko = 0
 
         while glavne_stevilke_koliko<6:
-            stevilka=random.randint(1,40)
+            stevilka=random.randint(1,39)
             if stevilka not in glavne_stevilke:
                 glavne_stevilke.append(stevilka)
                 glavne_stevilke_koliko+=1
 
         while dodatna_stevilka_koliko<1:
-            stevilka=random.randint(1,40)
+            stevilka=random.randint(1,39)
             if stevilka not in dodatna_stevilka:
                 dodatna_stevilka.append(stevilka)
                 dodatna_stevilka_koliko+=1
@@ -58,9 +58,12 @@ class MainHandler_loto(BaseHandler):
         glavne_stevilke.sort()
         dodatna_stevilka.sort()
 
-        print (glavne_stevilke,dodatna_stevilka)
+        view_vars = {
+            "stevila":glavne_stevilke,
+            "dodatna": dodatna_stevilka
+        }
 
-        return self.render_template("loto.html")
+        return self.render_template("loto.html", view_vars)
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
